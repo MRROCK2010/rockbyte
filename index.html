@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Byte Studio - Game Development</title>
+    <style>
+        :root {
+            --primary-color: #6441a5;
+            --secondary-color: #9580ff;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f8f8;
+            --accent-color: #ff5e5b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(135deg, var(--dark-color) 25%, transparent 25%) -50px 0,
+                        linear-gradient(225deg, var(--dark-color) 25%, transparent 25%) -50px 0;
+            background-size: 100px 100px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--accent-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, background-color 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #ff4545;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent-color), var(--secondary-color));
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 2rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .coming-soon h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .coming-soon p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #3a3a5a;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-logo {
+            width: 250px;
+            height: auto;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary-color);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 0 auto;
+            max-width: 700px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            margin: 0.5rem;
+            color: var(--light-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.2rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--light-color);
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .social-links a {
+                margin: 0.5rem;
+                font-size: 1rem;
+                padding: 0.7rem 1rem;
+            }
+        }
+
+        /* Animation classes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Rock Byte Logo" class="logo-img">
+                Rock Byte
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="hero">
+            <h1 class="animate">Unity Game Developer</h1>
+            <p class="animate delay-1">Creating immersive gaming experiences with a passion for physics-based gameplay, networking, and cross-platform development.</p>
+            <div class="animate delay-2">
+                <a href="#games" class="btn">Upcoming Games</a>
+                <a href="#contact" class="btn btn-outline">Get In Touch</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="games">
+        <div class="container">
+            <h2 class="section-title">My Games</h2>
+            <div class="coming-soon animate">
+                <h3>Games Coming Soon</h3>
+                <p>I'm currently working on some exciting new game projects. Check back soon to see my latest releases, or follow me on social media for updates and sneak peeks!</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/rockbyteofficial/" target="_blank">Instagram</a>
+                    <a href="https://discord.gg/62BqZgaE3N" target="_blank">Discord</a>
+                    <a href="https://www.youtube.com/@rockbytecoders" target="_blank">YouTube</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about">
+                <div class="about-img animate">
+                    <img src="logo.png" alt="Rock Byte Logo" class="about-logo">
+                </div>
+                <div class="animate delay-1">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 1rem;">Professional Unity Game Developer</h3>
+                    <p>I'm Rock, a professional Unity game developer with over 4 years of experience in game development. I specialize in creating physics-based games, implementing networking, and developing for both PC and Android platforms. With a strong passion for crafting immersive experiences, I have built and released multiple games, excelling in both gameplay mechanics and technical optimizations.</p>
+                    <p style="margin: 1rem 0;">I thrive as a solo developer, handling everything from programming to game design with efficiency and precision. Whether it's designing seamless multiplayer interactions, fine-tuning physics simulations, or optimizing performance across platforms, I bring expertise and dedication to every project I take on.</p>
+                    <h4 style="margin: 1.5rem 0 0.5rem 0;">Skills & Technologies:</h4>
+                    <div class="skills">
+                        <span class="tag">Unity</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">Physics-Based Games</span>
+                        <span class="tag">Networking</span>
+                        <span class="tag">PC Development</span>
+                        <span class="tag">Android Development</span>
+                        <span class="tag">Game Design</span>
+                        <span class="tag">Performance Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-info animate">
+                <h3 style="color: var(--secondary-color); margin-bottom: 1.5rem; text-align: center;">Contact Information</h3>
+                <p style="margin-bottom: 1.5rem; text-align: center;">Feel free to reach out for collaborations, job opportunities, or just to say hello!</p>
+                
+                <p style="text-align: center; margin-bottom: 0.5rem;"><strong>Email:</strong> <a href="mailto:rockbyteofficial@outlook.com" style="color: var(--accent-color); text-decoration: none;">rockbyteofficial@outlook.com</a></p>
+                
+                <div class="social-links">
+                    <a href="https://www.instagram.com/rockbyteofficial/" target="_blank">Instagram</a>
+                    <a href="https://discord.gg/62BqZgaE3N" target="_blank">Discord</a>
+                    <a href="https://www.youtube.com/@rockbytecoders" target="_blank">YouTube</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <img src="logo.png" alt="Rock Byte Logo" class="footer-logo">
+        </div>
+        <p>&copy; 2025 Rock Byte Studio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        window.addEventListener('load', function() {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            // Initial check for elements in viewport
+            checkAnimateElements(animateElements);
+            
+            // Check on scroll
+            window.addEventListener('scroll', function() {
+                checkAnimateElements(animateElements);
+            });
+        });
+
+        function checkAnimateElements(elements) {
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
